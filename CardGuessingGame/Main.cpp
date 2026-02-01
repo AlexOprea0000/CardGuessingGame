@@ -32,22 +32,25 @@ int main()
 			card.setCard(face, 0);
 			cout << "What location do you think it is:";
 			cin >> location;
-			for (auto& c : cardList)
+			vector<cardType> originalList = cardList;
+			for (auto& c : originalList) 
 				c.setBack(0);
-				
-			auto it = find(cardList.begin(), cardList.end(), card);
-			if (it != cardList.end())
-			{
-				 index = distance(cardList.begin(), it);
-				cout << "Index:" << index;
-				found = it->checkFace(face);
-				if (found && location==index)
-					cout << "You have succesfully found the face" << endl;
+
+				auto it = find(originalList.begin(), originalList.end(), card);
+				if (it != originalList.end())
+				{
+					index = distance(originalList.begin(), it);
+					cout << "Index:" << index;
+					found = it->checkFace(face);
+					if (found && location == index)
+						cout << "You have succesfully found the face" << endl;
+					else
+						cout << "Face doesn't exists" << endl;
+				}
 				else
-					cout << "Face doesn't exists" << endl;
-			}
-			else
-				cout << "Card unavailable" << endl;
+					cout << "Card unavailable" << endl;
+				
+			
 			break;
 		}
 		case 2:
@@ -57,21 +60,24 @@ int main()
 			card.setCard("", back);
 			cout << "What location do you think it is:";
 			cin >> location;
-			for (auto& c : cardList)
+			vector<cardType> originalList = cardList;
+			for (auto &c : originalList) 
 				c.setFace("");
-			
-			auto it = find(cardList.begin(), cardList.end(), card);
-			if (it != cardList.end())
-			{
-				index = distance(cardList.begin(), it);
-				found = it->checkBack(back);
-				if (found && location==index)
-					cout << "You have succesfully found the back" << endl;
+
+				auto it = find(originalList.begin(), originalList.end(), card);
+				if (it != originalList.end())
+				{
+					index = distance(originalList.begin(), it);
+					found = it->checkBack(back);
+					if (found && location == index)
+						cout << "You have succesfully found the back" << endl;
+					else
+						cout << "Back doesn't exists" << endl;
+				}
 				else
-					cout << "Back doesn't exists" << endl;
-			}
-			else
-				cout << "Card unavailable" << endl;
+					cout << "Card unavailable" << endl;
+				
+			
 			break;
 		}
 		case 3:
@@ -106,6 +112,7 @@ int main()
 		default:
 			break;
 		}
+		
 		random_shuffle(cardList.begin(), cardList.end());
 		displayMenu(); //display menu
 		cout << "Enter your choice: ";

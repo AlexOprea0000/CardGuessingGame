@@ -20,6 +20,7 @@ public:
 	bool operator!=(const cardType&) const;
 	bool checkFace(string f) const;
 	bool checkBack(int b) const;
+	cardType& operator=(const cardType& other);
 private:
 	string face;
 	int back;

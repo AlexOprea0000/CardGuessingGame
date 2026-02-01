@@ -32,3 +32,12 @@ bool cardType::checkBack(int b) const
 {
 	return back == b;
 }
+cardType& cardType::operator=(const cardType& other)
+{
+	if (this != &other)
+	{
+		face = other.face;
+		back = other.back;
+	}
+	return *this;
+}
